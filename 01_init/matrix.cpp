@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 namespace research {
     class Vector
@@ -45,7 +46,7 @@ namespace research {
     class Matrix
     {
         private:
-            std::vector<std::vector<int>> mStorage;
+            std::vector< std::vector<int> > mStorage;
         protected:
 
         public:
@@ -72,7 +73,7 @@ namespace research {
             
             void print()
             {
-                for (std::vector<std::vector<int>>::iterator iter = mStorage.begin(); iter != mStorage.end(); iter++)
+                for (std::vector< std::vector<int> >::iterator iter = mStorage.begin(); iter != mStorage.end(); iter++)
                 {
                     for (std::vector<int>::iterator elementiter = (*iter).begin(); elementiter != (*iter).end(); elementiter++)
                     {
