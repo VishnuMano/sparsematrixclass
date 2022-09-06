@@ -49,11 +49,36 @@ namespace research {
         protected:
 
         public:
-            void push(int aRow, int aCol, int value)
+            void push(int aRow, int aCol, int aValue)
             {
                 if (aRow >= mStorage.size())
                 {
-                    /* code */
+                    do
+                    {
+                        mStorage.push_back(std::vector<int>());
+                    } while (mStorage.size() < aRow);
+                }
+                std::vector<int>& rowContainer = mStorage.at(aRow);
+
+                if (aCol >= rowContainer.size())
+                {
+                    do
+                    {
+                        rowContainer.push_back(0);
+                    } while (rowContainer.size() <= aCol);
+                }
+                rowContainer.at(aCol) = aValue;
+            }
+            
+            void print()
+            {
+                for (std::vector<std::vector<int>>::iterator iter = mStorage.begin(); iter != mStorage.end(); iter++)
+                {
+                    for (std::vector<int>::iterator elementiter = (*iter).begin(); elementiter != (*iter).end(); elementiter++)
+                    {
+                        std::cout << *elementiter << " ";
+                    }
+                    std::cout << std::endl;
                 }
                 
             }
@@ -68,6 +93,9 @@ int main()
     vect1.printVect();
     std::cout << vect1.get(1) << std::endl;
 
-    std::vector<std::vector<int>> test = { {1, 2, 3}, {4, 5, 6} };
-    std::cout << test.size();
+    research::Matrix mat1;
+    mat1.push(0, 1, 5);
+    mat1.push(1, 1, 3);
+    mat1.push(2, 1, 7);
+    mat1.print();
 }
