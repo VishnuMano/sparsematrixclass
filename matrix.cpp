@@ -28,6 +28,17 @@ namespace research {
                 mStorage.at(aCol) = aValue;
             }
 
+            void input(int aSize)
+            {
+                int a;
+                for (size_t i = 0; i < aSize; i++)
+                {
+                    std::cin >> a;
+                    mStorage.push_back(a);
+                }
+                
+            }
+
             int get(int aCol)
             {
                 return mStorage.at(aCol); 
@@ -40,6 +51,11 @@ namespace research {
                     std::cout << *iter << " ";
                 }
                 std::cout << std::endl;
+            }
+
+            int size()
+            {
+                return mStorage.size();
             }
     };
 
@@ -84,6 +100,39 @@ namespace research {
                 
             }
     };
+
+    class cscVector
+    {
+        private:
+            std::vector<int> i;
+            std::vector<int> x;
+        public:
+            cscVector(Vector aStdVect)
+            {
+                for (size_t a = 0; a < aStdVect.size(); a++)
+                {
+                    if (aStdVect.get(a) != 0)
+                    {
+                        i.push_back(a);
+                        x.push_back(aStdVect.get(a));
+                    }
+                }
+            }
+            void printVect()
+            {
+                std::cout << "i: " << std::endl;
+                for (size_t a = 0; a < i.size(); a++)
+                {
+                    std::cout << i.at(a) << " ";
+                }
+                std::cout << std::endl << "x: " << std::endl;
+                for (size_t a = 0; a < x.size(); a++)
+                {
+                    std::cout << x.at(a) << " ";
+                }
+                std::cout << std::endl;
+            }
+    };
 }
 int main()
 {
@@ -91,12 +140,8 @@ int main()
     vect1.push(0, 5);
     vect1.push(1, 3);
     vect1.push(2, 11);
-    vect1.printVect();
-    std::cout << vect1.get(1) << std::endl;
+    vect1.input(17);
 
-    research::Matrix mat1;
-    mat1.push(0, 1, 5);
-    mat1.push(1, 1, 3);
-    mat1.push(2, 1, 7);
-    mat1.print();
+    research::cscVector csc1(vect1);
+    csc1.printVect();
 }
