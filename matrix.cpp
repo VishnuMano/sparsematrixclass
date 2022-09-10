@@ -50,7 +50,6 @@ namespace smc
         public:
             VectorCSC(VectorSparse aStandard)
             {
-
                 
             }
     };
