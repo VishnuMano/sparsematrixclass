@@ -30,7 +30,7 @@ namespace smc
             }
             int getSize()
             {
-                return 0;
+                return mStorage.size();
             }
             void print()
             {
