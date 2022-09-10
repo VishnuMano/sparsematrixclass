@@ -28,6 +28,21 @@ namespace smc
                     }
                 }              
             }
+            // Check with Dr. DeBruine
+            // VectorCSC(const StdVector& aStandard)
+            // {
+            //     mSize = aStandard.size();
+            //     int counter = 0;
+            //     for (const auto val : aStandard)
+            //     {
+            //         if (val != 0)
+            //         {
+            //             mContainerX.push_back(val);
+            //             mContainerI.push_back(counter);
+            //         }
+            //         counter++;
+            //     }              
+            // }
             
             // returning const ref to value and index vectors
             std::tuple<const StdVector&, const StdVector&> getCSC() const
