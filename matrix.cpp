@@ -1,7 +1,12 @@
 #include <iostream>
 #include <vector>
 
-namespace research
+namespace smc
 {
     
+}
+
+int main()
+{
+
 }
