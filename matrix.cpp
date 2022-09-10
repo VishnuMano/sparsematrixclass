@@ -41,6 +41,19 @@ namespace smc
                 std::cout << std::endl;
             }
     };
+
+    class VectorCSC
+    {
+        private:
+            std::vector<int> I;
+            std::vector<int> X;
+        public:
+            VectorCSC(VectorSparse aStandard)
+            {
+
+                
+            }
+    };
 }
 
 int main()
@@ -63,6 +76,6 @@ int main()
     vector1.insert(0);
     vector1.insert(0);
     vector1.insert(1);
-
     vector1.print();
+    std::cout << vector1.getSize() << std::endl;
 }
