@@ -1,21 +1,21 @@
-#include <iostream>
-#include <vector>
-#include <tuple>
-#include "vectorcsc.h"
+#include "smc.h"
 
 int main()
 {
-    std::vector<int> sample = {1,0,0,1,3,2,0,0,0,0,0,2};
+    std::vector<int> sample = {1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2};
     smc::VectorCSC test(sample);
-    auto[veci, vecx] = test.getCSC();
-    for (auto elem : veci)
+    auto[test_i, test_x] = test.getCSC();
+    for (std::vector<int>::const_iterator iter = test_i.begin(); iter != test_i.end(); iter++)
     {
-        std::cout << elem << " ";
+        std::cout << *iter << " ";
     }
     std::cout << std::endl;
-    for (auto elem : vecx)
+    
+    for (std::vector<int>::const_iterator iter = test_x.begin(); iter != test_x.end(); iter++)
     {
-        std::cout << elem << " ";
+        std::cout << *iter << " ";
     }
     std::cout << std::endl;
+    
+    // test.display();
 }
