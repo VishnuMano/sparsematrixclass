@@ -4,7 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <iostream>
-
+// sparse matrix namespace
 namespace smc
 {
     class VectorCSC
