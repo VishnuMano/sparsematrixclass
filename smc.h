@@ -4,7 +4,6 @@
 #include <vector>
 #include <tuple>
 #include <iostream>
-
 #include <algorithm>
 
 namespace smc
