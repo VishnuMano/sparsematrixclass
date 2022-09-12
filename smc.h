@@ -5,7 +5,7 @@
 #include <tuple>
 #include <iostream>
 
-// test
+// sparse matrix namespace
 
 namespace smc
 {
