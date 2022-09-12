@@ -18,4 +18,7 @@ int main()
     std::cout << std::endl;
     
     // test.display();
+
+    smc::VectorSRLE fun(sample);
+    fun.display();
 }

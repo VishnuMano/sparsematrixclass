@@ -4,7 +4,8 @@
 #include <vector>
 #include <tuple>
 #include <iostream>
-// sparse matrix namespace
+#include <algorithm>
+
 namespace smc
 {
     class VectorCSC
@@ -41,6 +42,37 @@ namespace smc
             std::tuple<const std::vector<int>&, const std::vector<int>&> getCSC() const
             {
                 return {mContainerI, mContainerX}; 
+            }
+    };
+
+    class VectorSRLE
+    {
+        private:
+            std::vector<int> i;
+            std::vector<int> j;
+            std::vector<int> x;
+        public:
+            VectorSRLE(std::vector<int> aStandard)
+            {   
+                for(std::vector<int>::iterator iter = aStandard.begin(); iter != aStandard.end(); iter++)
+                {
+                    if (std::count(x.begin(), x.end(), *iter))
+                    {
+                        continue;
+                    }
+                    if(*iter != 0)
+                    {
+                        x.push_back(*iter);
+                    }
+                }
+            }
+            void display()
+            {
+                for (std::vector<int>::iterator iter = x.begin(); iter != x.end(); iter++)
+                {
+                    std::cout << *iter << " ";
+                }
+                
             }
     };
 }
