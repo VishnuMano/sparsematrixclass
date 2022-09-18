@@ -1,9 +1,10 @@
 #ifndef SMC_H
 #define SMC_H
 
+#include <iostream>
 #include <vector>
 #include <tuple>
-#include <iostream>
+#include <map>
 #include <algorithm>
 
 namespace smc
@@ -11,10 +12,11 @@ namespace smc
     class VectorCSC
     {
         private:
+            size_t mSize;
+
+        public:
             std::vector<int> mContainerI; // Vector to Store Indices
             std::vector<int> mContainerX; // Vector to Store Values
-            size_t mSize;
-        public:
             VectorCSC(std::vector<int>& aStandard)
             {
                 mSize = aStandard.size();
@@ -48,31 +50,46 @@ namespace smc
     class VectorSRLE
     {
         private:
-            std::vector<int> i;
-            std::vector<int> j;
-            std::vector<int> x;
+            std::vector<int> srleI;
+            std::vector<int> srleJ;
+            std::vector<int> srleX;
         public:
-            VectorSRLE(std::vector<int> aStandard)
-            {   
-                for(std::vector<int>::iterator iter = aStandard.begin(); iter != aStandard.end(); iter++)
+            VectorSRLE(VectorCSC aCSC)
+            {
+                std::map<int, std::vector<int>> temp;
+                int ctr = 0;
+                for (auto item : aCSC.mContainerX)
                 {
-                    if (std::count(x.begin(), x.end(), *iter))
+                    temp[item].push_back(aCSC.mContainerI.at(ctr++));
+                }
+                for (auto item : temp)
+                {
+                    srleX.push_back(item.first);
+                    srleJ.push_back(srleI.size());
+                    for (auto it = item.second.begin(); it != item.second.end(); it++)
                     {
-                        continue;
-                    }
-                    if(*iter != 0)
-                    {
-                        x.push_back(*iter);
+                        srleI.push_back(*it);
                     }
                 }
             }
             void display()
             {
-                for (std::vector<int>::iterator iter = x.begin(); iter != x.end(); iter++)
+                std::cout << "--------x---------" << std::endl;
+                for (std::vector<int>::iterator it = srleX.begin(); it != srleX.end(); it++)
                 {
-                    std::cout << *iter << " ";
+                    std::cout << *it << " ";
                 }
-                
+                std::cout << std::endl << "--------j---------" << std::endl;
+                for (std::vector<int>::iterator it = srleJ.begin(); it != srleJ.end(); it++)
+                {
+                    std::cout << *it << " ";
+                }
+                std::cout << std::endl << "--------i---------" << std::endl;
+                for (std::vector<int>::iterator it = srleI.begin(); it != srleI.end(); it++)
+                {
+                    std::cout << *it << " ";
+                }
+                std::cout << std::endl;
             }
     };
 }
