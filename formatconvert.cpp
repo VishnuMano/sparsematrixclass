@@ -48,30 +48,27 @@ int main()
         temp[item].push_back(cscI[ctr++]);
     }
     vector<int> srleI;
+    vector<int> srleJ;
     for (auto item : temp)
     {
+        srleJ.push_back(srleI.size());
         for (auto it = item.second.begin(); it != item.second.end(); it++)
         {
             srleI.push_back(*it);
         }
     }
     
-    cout << "--------------------------------" << endl;
+    cout << "----------------srleI----------------" << endl;
     for (auto item : srleI)
     {
         cout << item << " ";
     }
     cout << endl;
-    cout << "--------------------------------" << endl;
-
-    
-    for (auto item : temp)
+    cout << "--------------srleJ------------------" << endl;
+    for (auto item : srleJ)
     {
-        cout << item.first << endl;
-        for (auto elem : item.second)
-        {
-            cout << elem << " ";
-        }
-        cout << endl;
+        cout << item << " ";
     }
+    cout << endl;
+    cout << "--------------------------------" << endl;
 }
