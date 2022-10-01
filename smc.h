@@ -31,6 +31,15 @@ namespace smc
                     counter++;
                 }
             }
+            class iterator 
+            {
+                public:
+                    iterator(VectorCSC& ptr, int position) : ptr(ptr), position(position) {}
+                    iterator operator++ ()
+                    {
+                        return position++;
+                    }
+            }
             void display()
             {
                 std::cout << "index -> value" << std::endl;
