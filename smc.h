@@ -12,15 +12,17 @@ namespace smc
     class VectorCSC
     {
         private:
-            size_t mSize;
-
+            
         public:
             std::vector<int> mContainerI; // Vector to Store Indices
             std::vector<int> mContainerX; // Vector to Store Values
+
             VectorCSC(std::vector<int>& aStandard)
             {
-                mSize = aStandard.size();
                 int counter = 0;
+                mContainerI.reserve(aStandard.size());
+                mContainerX.reserve(aStandard.size());
+                
                 for (std::vector<int>::const_iterator iter = aStandard.begin(); iter != aStandard.end(); iter++)
                 {
                     if (*iter != 0)
@@ -30,20 +32,53 @@ namespace smc
                     }
                     counter++;
                 }
+                mContainerI.shrink_to_fit();
+                mContainerX.shrink_to_fit();
             }
+        
             class iterator 
             {
                 private:
-                    int& mPtr;
-                    int mPos;
+                    VectorCSC& mPTR;
+                    int mPos = 0;
                 public:
-                    iterator(int& pPtr, int pPos) 
+                    iterator(VectorCSC& aPTR, int aPos) : mPTR(aPTR), mPos(aPos) {}
+                    iterator operator ++ ()
                     {
-                        mPtr = pPtr;
-                        mPos = pPos;
-                    };
+                        mPos++;
+                        return *this;
+                    }
+
+                    iterator operator ++ (int index)
+                    {
+                        iterator tmp = *this;
+                        ++(*this);
+                        return tmp;
+                    }
+
+                    const bool operator != (const iterator& other) const
+                    {
+                        return mPos != other.mPos;
+                    }
+
+                    const int& operator*() const
+                    {
+                        return mPTR.mContainerX.at(mPos);
+                    }
+                    const int val() const
+                    {
+                        return mPTR.mContainerX.at(mPos);
+                    }
             };
-            iterator begin ()
+
+            iterator begin()
+            {
+                return iterator(*this, (int)0);
+            }
+            iterator end()
+            {
+                return iterator(*this, mContainerX.size());
+            }
 
             void display()
             {
