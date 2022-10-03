@@ -33,13 +33,18 @@ namespace smc
             }
             class iterator 
             {
+                private:
+                    int& mPtr;
+                    int mPos;
                 public:
-                    iterator(VectorCSC& ptr, int position) : ptr(ptr), position(position) {}
-                    iterator operator++ ()
+                    iterator(int& pPtr, int pPos) 
                     {
-                        return position++;
-                    }
-            }
+                        mPtr = pPtr;
+                        mPos = pPos;
+                    };
+            };
+            iterator begin ()
+
             void display()
             {
                 std::cout << "index -> value" << std::endl;
