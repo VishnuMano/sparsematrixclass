@@ -36,13 +36,13 @@ namespace smc
                 mContainerX.shrink_to_fit();
             }
         
-            class iterator 
+            class iterator
             {
                 private:
-                    VectorCSC& mPTR;
-                    int mPos = 0;
+                    const VectorCSC& mRef;
+                    int mPos;
                 public:
-                    iterator(VectorCSC& aPTR, int aPos) : mPTR(aPTR), mPos(aPos) {}
+                    iterator(VectorCSC& aRef, int aPos) : mRef(aRef), mPos(aPos) {}
                     iterator operator ++ ()
                     {
                         mPos++;
@@ -51,34 +51,88 @@ namespace smc
 
                     iterator operator ++ (int index)
                     {
-                        iterator tmp = *this;
-                        ++(*this);
-                        return tmp;
+                        return ++(*this);
                     }
 
-                    const bool operator != (const iterator& other) const
+                    const bool operator != (const iterator& other)
                     {
                         return mPos != other.mPos;
                     }
 
-                    const int& operator*() const
+                    const int& operator* ()
                     {
-                        return mPTR.mContainerX.at(mPos);
+                        return mRef.mContainerX.at(mPos);
                     }
-                    const int val() const
+                    
+                    int val()
                     {
-                        return mPTR.mContainerX.at(mPos);
+                        return mRef.mContainerX.at(mPos); 
                     }
             };
 
             iterator begin()
             {
-                return iterator(*this, (int)0);
+                return iterator(*this, 0);
             }
+
             iterator end()
             {
                 return iterator(*this, mContainerX.size());
             }
+
+
+
+
+
+
+
+
+
+            // class iterator 
+            // {
+            //     private:
+            //         const VectorCSC& mPTR;
+            //         int mPos = 0;
+            //     public:
+            //         iterator(VectorCSC& aPTR, int aPos) : mPTR(aPTR), mPos(aPos) {}
+            //         iterator operator ++ ()
+            //         {
+            //             mPos++;
+            //             std::cout << "Postinc" << std::endl;
+            //             return *this;
+            //         }
+
+            //         iterator operator ++ (int index)
+            //         {
+            //             iterator tmp = *this;
+            //             ++(*this);
+            //             std::cout << "Preinc" << std::endl;
+            //             return tmp;
+            //         }
+
+            //         const bool operator != (const iterator& other) const
+            //         {
+            //             return mPos != other.mPos;
+            //         }
+
+            //         const int& operator*() const
+            //         {
+            //             return mPTR.mContainerX.at(mPos);
+            //         }
+            //         const int val() const
+            //         {
+            //             return mPTR.mContainerX.at(mPos);
+            //         }
+            // };
+
+            // iterator begin()
+            // {
+            //     return iterator(*this, 0);
+            // }
+            // iterator end()
+            // {
+            //     return iterator(*this, mContainerX.size());
+            // }
 
             void display()
             {
