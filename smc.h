@@ -61,7 +61,7 @@ namespace smc
                         return mPos != other.mPos;
                     }
 
-                    const int& operator* ()
+                    const int& operator* () const
                     {
                         return mRef.mContainerX.at(mPos);
                     }
@@ -81,11 +81,6 @@ namespace smc
             {
                 return iterator(*this, mContainerX.size());
             }
-
-
-
-
-
 
             void display()
             {
@@ -128,6 +123,36 @@ namespace smc
                     }
                 }
             }
+            
+            std::vector<int>& getSRLEI()
+            {
+                return srleI;
+            }
+            std::vector<int>& getSRLEJ()
+            {
+                return srleJ;
+            }
+            std::vector<int>& getSRLEX()
+            {
+                return srleX;
+            }
+
+            class iterator
+            {
+                private:
+                    const VectorSRLE& mRef;
+                    int mPos;
+                    std::vector<int> srle;
+                public:
+                    iterator(VectorSRLE& aRef, int aPos) : mRef(aRef), mPos(aPos) 
+                    {
+                        srle.reserve(aRef.srleI.size() + aRef.srleX.size());
+                        
+                        
+                        
+                    }
+            };
+
             void display()
             {
                 std::cout << "--------x---------" << std::endl;
@@ -146,6 +171,18 @@ namespace smc
                     std::cout << *it << " ";
                 }
                 std::cout << std::endl;
+            }
+    };
+
+    class TRCSC
+    {
+        private:
+            std::vector<int> container;
+        public:
+            TRCSC(VectorSRLE& srle)
+            {
+                std::vector<int> srleI = *(srle.getSRLEI());
+                container.reserve(srle.getSRLEI)
             }
     };
 }
