@@ -97,6 +97,7 @@ namespace smc
     {
         private:
             std::vector<int> mContainer;
+            std::vector<int> mIndex;
         public:
             VectorTRCSCNP(std::vector<int> aRef)
             {
@@ -118,19 +119,69 @@ namespace smc
                     for(auto item : val)
                     {
                         mContainer.push_back(item);
+                        mIndex.push_back(item);
                     }
                 }
                 mContainer.shrink_to_fit();
+                sort(mIndex.begin(), mIndex.end());
             }
-
+        
             class iterator
             {
                 private:
                     VectorTRCSCNP& mRef;
-                    int indexPos;
-                    int valPos;
+                    int mPos;
+                    int curVal = 0;
+                    int find(int target, std::vector<int> vect)
+                    {
+                        for (auto item : mRef.mContainer)
+                        {
+                            if (item < 0)
+                            {
+                                curVal = -1 * item;
+                            }
+                            if (item == target)
+                            {
+                                return curVal;
+                            }
+                        }
+                        return -1;
+                    }
                 public:
-                    iterator()
+                    iterator(VectorTRCSCNP& aRef, int aPos, std::vector<int>& aIndex): mRef(aRef), mPos(aPos) {}
+                    iterator operator ++ ()
+                    {
+                        mPos++;
+                        return *this;
+                    }
+
+                    iterator operator ++ (int postincrement)
+                    {
+                        iterator temp = *this;
+                        ++(*this);
+                        return temp;
+                    }
+
+                    int operator * ()
+                    {
+                        int target = mRef.mIndex.at(mPos);
+                        return find(target, mRef.mContainer);
+                    }
+
+                    bool operator != (const iterator& other) const
+                    {
+                        return mPos != other.mPos;
+                    }
+            };
+
+            iterator begin()
+            {
+                return iterator(*this, 0, mIndex);
+            }
+
+            iterator end()
+            {
+                return iterator(*this, mContainer.size() - 3, mIndex);
             }
 
             void display()

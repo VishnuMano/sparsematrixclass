@@ -1,0 +1,8 @@
+Create 2 Vectors (Vectorization, Sorted Index)
+
+Write at function to find value at given index
+
+Update ++ operator
+
+1. Iterate through index vector
+2. Find value at target index
