@@ -126,12 +126,13 @@ namespace smc
                 sort(mIndex.begin(), mIndex.end());
             }
         
-            class iterator
+            class iterator // mPos iterates through an index vector, not a value vector
             {
                 private:
                     VectorTRCSCNP& mRef;
                     int mPos;
                     int curVal = 0;
+                    // Find Value For Given Index
                     int find(int target, std::vector<int> vect)
                     {
                         for (auto item : mRef.mContainer)
@@ -164,6 +165,7 @@ namespace smc
 
                     int operator * ()
                     {
+                        // Find the intended index
                         int target = mRef.mIndex.at(mPos);
                         return find(target, mRef.mContainer);
                     }
