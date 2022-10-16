@@ -39,36 +39,31 @@ namespace smc
             class iterator
             {
                 private:
-                    const VectorCSC& mRef;
-                    int mPos;
+                    VectorCSC& mRef;
+                    size_t mPos = 0;
                 public:
-                    iterator(VectorCSC& aRef, int aPos) : mRef(aRef), mPos(aPos) {}
+                    iterator(VectorCSC& aRef, size_t aPos): mRef(aRef), mPos(aPos) {}
                     iterator operator ++ ()
                     {
-                        mPos++;
+                        ++mPos;
                         return *this;
                     }
 
-                    iterator operator ++ (int index)
+                    iterator operator ++ (int preincrement)
                     {
-                        iterator& tmp = *this;
+                        iterator temp = *this;
                         ++(*this);
-                        return tmp;
+                        return temp;
                     }
 
-                    const bool operator != (const iterator& other)
-                    {
-                        return mPos != other.mPos;
-                    }
-
-                    const int& operator* () const
+                    size_t operator * ()
                     {
                         return mRef.mContainerX.at(mPos);
                     }
-                    
-                    int val()
+
+                    bool operator != (const iterator &other) const
                     {
-                        return mRef.mContainerX.at(mPos); 
+                        return mPos != other.mPos;
                     }
             };
 
@@ -98,93 +93,127 @@ namespace smc
             }
     };
 
-    class VectorSRLE
+    class VectorTRCSCNP
     {
         private:
-            std::vector<int> srleI;
-            std::vector<int> srleJ;
-            std::vector<int> srleX;
+            std::vector<int> mContainer;
         public:
-            VectorSRLE(VectorCSC aCSC)
+            VectorTRCSCNP(std::vector<int> aRef)
             {
-                std::map<int, std::vector<int>> temp;
-                int ctr = 0;
-                for (auto item : aCSC.mContainerX)
+                std::map<int, std::vector<int>> Buckets;
+                mContainer.reserve(aRef.size());
+                size_t ctr = 0;
+                for (auto item : aRef)
                 {
-                    temp[item].push_back(aCSC.mContainerI.at(ctr++));
-                }
-                for (auto item : temp)
-                {
-                    srleX.push_back(item.first);
-                    srleJ.push_back(srleI.size());
-                    for (auto it = item.second.begin(); it != item.second.end(); it++)
+                    if(item > 0)
                     {
-                        srleI.push_back(*it);
+                        Buckets[item].push_back(ctr);
+                    }
+                    ctr++;
+                }
+
+                for(auto &[key, val] : Buckets)
+                {
+                    mContainer.push_back(-1 * key);
+                    for(auto item : val)
+                    {
+                        mContainer.push_back(item);
                     }
                 }
-            }
-            
-            std::vector<int>& getSRLEI()
-            {
-                return srleI;
-            }
-            std::vector<int>& getSRLEJ()
-            {
-                return srleJ;
-            }
-            std::vector<int>& getSRLEX()
-            {
-                return srleX;
+                mContainer.shrink_to_fit();
             }
 
             class iterator
             {
                 private:
-                    const VectorSRLE& mRef;
-                    int mPos;
-                    std::vector<int> srle;
+                    VectorTRCSCNP& mRef;
+                    int indexPos;
+                    int valPos;
                 public:
-                    iterator(VectorSRLE& aRef, int aPos) : mRef(aRef), mPos(aPos) 
-                    {
-                        srle.reserve(aRef.srleI.size() + aRef.srleX.size());
-                        
-                        
-                        
-                    }
-            };
+                    iterator()
+            }
 
             void display()
             {
-                std::cout << "--------x---------" << std::endl;
-                for (std::vector<int>::iterator it = srleX.begin(); it != srleX.end(); it++)
+                for (auto item : mContainer)
                 {
-                    std::cout << *it << " ";
+                    std::cout << item << " ";
                 }
-                std::cout << std::endl << "--------j---------" << std::endl;
-                for (std::vector<int>::iterator it = srleJ.begin(); it != srleJ.end(); it++)
-                {
-                    std::cout << *it << " ";
-                }
-                std::cout << std::endl << "--------i---------" << std::endl;
-                for (std::vector<int>::iterator it = srleI.begin(); it != srleI.end(); it++)
-                {
-                    std::cout << *it << " ";
-                }
-                std::cout << std::endl;
             }
     };
 
-    class TRCSC
-    {
-        private:
-            std::vector<int> container;
-        public:
-            TRCSC(VectorSRLE& srle)
-            {
-                std::vector<int> srleI = *(srle.getSRLEI());
-                container.reserve(srle.getSRLEI)
-            }
-    };
+
+//     class VectorSRLE
+//     {
+//         private:
+//             std::vector<int> srleI;
+//             std::vector<int> srleJ;
+//             std::vector<int> srleX;
+//         public:
+//             VectorSRLE(VectorCSC aCSC)
+//             {
+//                 std::map<int, std::vector<int>> temp;
+//                 int ctr = 0;
+//                 for (auto item : aCSC.mContainerX)
+//                 {
+//                     temp[item].push_back(aCSC.mContainerI.at(ctr++));
+//                 }
+//                 for (auto item : temp)
+//                 {
+//                     srleX.push_back(item.first);
+//                     srleJ.push_back(srleI.size());
+//                     for (auto it = item.second.begin(); it != item.second.end(); it++)
+//                     {
+//                         srleI.push_back(*it);
+//                     }
+//                 }
+//             }
+            
+//             std::vector<int>& getSRLEI()
+//             {
+//                 return srleI;
+//             }
+//             std::vector<int>& getSRLEJ()
+//             {
+//                 return srleJ;
+//             }
+//             std::vector<int>& getSRLEX()
+//             {
+//                 return srleX;
+//             }
+
+//             void display()
+//             {
+//                 std::cout << "--------x---------" << std::endl;
+//                 for (std::vector<int>::iterator it = srleX.begin(); it != srleX.end(); it++)
+//                 {
+//                     std::cout << *it << " ";
+//                 }
+//                 std::cout << std::endl << "--------j---------" << std::endl;
+//                 for (std::vector<int>::iterator it = srleJ.begin(); it != srleJ.end(); it++)
+//                 {
+//                     std::cout << *it << " ";
+//                 }
+//                 std::cout << std::endl << "--------i---------" << std::endl;
+//                 for (std::vector<int>::iterator it = srleI.begin(); it != srleI.end(); it++)
+//                 {
+//                     std::cout << *it << " ";
+//                 }
+//                 std::cout << std::endl;
+//             }
+//     };
+
+//     class TRCSC
+//     {
+//         private:
+//             std::vector<int> container;
+//         public:
+//             TRCSC(VectorSRLE& srle)
+//             {
+//                 std::vector<int> srleI = *(srle.getSRLEI());
+//                 container.reserve(srle.getSRLEI)
+//             }
+//     };
 }
 
 #endif
