@@ -121,15 +121,28 @@ namespace smc {
                 }
                 mContainer.shrink_to_fit();
                 sort(mIndex.begin(), mIndex.end());
+                
+                // Output to storage
                 std::ofstream ofs;
                 ofs.open("storage.txt");
                 for (std::map<int, std::vector<int>>::iterator iter = Buckets.begin(); iter != Buckets.end(); iter++)
                 {
                     ofs << typeid(iter->first).name() << iter->first;
+                    int temp;
                     for (auto item : iter->second)
                     {
-                        ofs << item;
+                        if(item == 0)
+                        {
+                            temp = 0;
+                            ofs << item;
+                        }
+                        else
+                        {
+                            ofs << item - temp;
+                        }
+                        temp = item;
                     }
+                    temp = 0;
                     ofs << "_";
                 }
             }
