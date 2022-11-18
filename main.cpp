@@ -1,25 +1,11 @@
-#include <iostream>
-#include <fstream>
-
-using namespace std;
-
-class CSC
-{
-    private:
-        
-    public:
-};
-
-class SRLE
-{
-    private:
-        
-    public:
-};
+#include "smc.h"
 
 int main()
 {
-    ofstream ofs;
-    ofs.open("storage.txt");
-    
+    std::vector<int> src = {1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 2, 3, 0, 0, 1};
+    smc::CSC csc(src);
+    for(smc::CSC::iterator iter = csc.begin(); iter != csc.end(); ++iter)
+    {
+        std::cout << *iter << " ";
+    }
 }
