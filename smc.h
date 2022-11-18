@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <typeinfo>
 
 namespace smc {
     class CSC
@@ -120,6 +121,17 @@ namespace smc {
                 }
                 mContainer.shrink_to_fit();
                 sort(mIndex.begin(), mIndex.end());
+                std::ofstream ofs;
+                ofs.open("storage.txt");
+                for (std::map<int, std::vector<int>>::iterator iter = Buckets.begin(); iter != Buckets.end(); iter++)
+                {
+                    ofs << typeid(iter->first).name() << iter->first;
+                    for (auto item : iter->second)
+                    {
+                        ofs << item;
+                    }
+                    ofs << "_";
+                }
             }
         
             class iterator // mPos iterates through an index vector, not a value vector
