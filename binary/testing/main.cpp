@@ -1,3 +1,12 @@
+/*
+17 - 10001
+08 - 01000
+04 - 00100
+02 - 00010
+01 - 00001
+*/
+
+
 #include <iostream>
 
 using namespace std;
@@ -13,6 +22,7 @@ int main()
     cout << oneCount(0110) << endl;
     int test = 4;
     test >>= 1;
+    cout << sizeof(test);
 }
 
 
