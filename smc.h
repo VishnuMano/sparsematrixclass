@@ -127,7 +127,7 @@ namespace smc {
                 ofs.open("storage.txt");
                 for (std::map<int, std::vector<int>>::iterator iter = Buckets.begin(); iter != Buckets.end(); iter++)
                 {
-                    ofs << typeid(iter->first).name() << iter->first;
+                    ofs << typeid(iter->first).name() << -1 * iter->first;
                     int temp;
                     for (auto item : iter->second)
                     {
