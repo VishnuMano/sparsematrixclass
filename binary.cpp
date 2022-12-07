@@ -11,8 +11,5 @@ int countOnes(unsigned int a)
 int main()
 {
     int num = 14; // 1110
-    // cout << countOnes(num);
-    int a = (5 & 5);
-    cout << a;
-
+    cout << countOnes(num);
 }
