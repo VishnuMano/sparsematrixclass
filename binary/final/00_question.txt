@@ -1,1 +1,0 @@
-Devise a fast algorithm for computing the number of 1-bits in an unsigned integer.
