@@ -33,3 +33,6 @@
 
 #Custom
 *.vscode
+
+#Ignore Eigen Library
+eigen-git-mirror
