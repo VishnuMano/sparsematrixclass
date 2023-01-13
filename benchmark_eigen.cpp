@@ -33,15 +33,33 @@ class Timer
 
 int main()
 {
-    Eigen::Matrix3i m_colsum;
+    int columnSum;
     {
         Timer time;
-        Eigen::Matrix<int, 3, 3> m;
-        m << 0, 1, 2,
-             3, 4, 5,
-             6, 7, 8;
-    
-        std::cout << m.colwise().sum();
+        Eigen::SparseMatrix<int> m(3, 5);
+        m.insert(0, 0) = 0;
+        m.insert(0, 1) = 0;
+        m.insert(0, 2) = 1;
+        m.insert(0, 3) = 0;
+        m.insert(0, 4) = 3;
+        m.insert(1, 0) = 3;
+        m.insert(1, 1) = 2;
+        m.insert(1, 2) = 0;
+        m.insert(1, 3) = 1;
+        m.insert(1, 4) = 0;
+        m.insert(2, 0) = 0;
+        m.insert(2, 1) = 1;
+        m.insert(2, 2) = 0;
+        m.insert(2, 3) = 0;
+        m.insert(2, 4) = 0;
+        m.makeCompressed();
+        /*  
+            0, 0, 1, 0, 3,
+            3, 2, 0, 1, 0,
+            0, 1, 0, 0, 0;
+        */
+        Eigen::SparseMatrix<int> m_transposed = m.transpose();
+        columnSum = m_transposed.sum();
     }
-    std::cout << m_colsum << std::endl;
+    std::cout << columnSum << std::endl;
 }
