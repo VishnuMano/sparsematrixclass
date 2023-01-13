@@ -53,7 +53,7 @@ int main()
         m.insert(2, 3) = 0;
         m.insert(2, 4) = 0;
         m.makeCompressed();
-        /*  
+        /*
             0, 0, 1, 0, 3,
             3, 2, 0, 1, 0,
             0, 1, 0, 0, 0;

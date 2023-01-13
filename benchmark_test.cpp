@@ -1,44 +1,16 @@
 #include <iostream>
+#include <Eigen/Sparse>
 
-using namespace std;
-
-class Timer
-{
-    public:
-        Timer() 
-        {
-            m_StartTimepoint = chrono::high_resolution_clock::now();
-        }
-
-        ~ Timer()
-        {
-            Stop();
-        }
-
-        void Stop()
-        {
-            auto endTimepoint = chrono::high_resolution_clock::now();
-            auto start = chrono::time_point_cast<chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-            auto stop = chrono::time_point_cast<chrono::microseconds>(endTimepoint).time_since_epoch().count();
-            auto micro_duration = stop - start;
-            double milli_duration = micro_duration * 0.001;
-            cout << micro_duration << " microseconds\n";
-            cout << milli_duration << " milliseconds\n";
-        }
-    private:
-        chrono::time_point<chrono::high_resolution_clock> m_StartTimepoint;
-};
+using namespace Eigen;
 
 int main()
 {
-    int value = 0;
+    SparseMatrix<std::complex<double>, ColMajor> m(1000, 1000);
+    for (size_t i = 0; i < m.cols(); i++)
     {
-        Timer timer;
-        for (size_t i = 0; i < 1000000; i++)
+        for (size_t j = 0; j < m.rows(); j++)
         {
-			value += 2;
+            m.insert(j, i) = 0;
         }
     }
-
-    cout << value << endl;
 }
