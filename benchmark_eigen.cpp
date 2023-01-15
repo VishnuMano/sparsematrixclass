@@ -31,35 +31,57 @@ class Timer
         chrono::time_point<chrono::high_resolution_clock> m_StartTimepoint;
 };
 
+void printSum(vector<double> p)
+{
+    for (int i = 0; i < p.size(); ++i) {
+        std::cout << p[i] << std::endl;
+    }
+}
+
 int main()
 {
-    int columnSum;
+    double columnSum;
+    Eigen::SparseMatrix<double> m(3, 5);
+    m.insert(0, 0) = 0;
+    m.insert(0, 1) = 0;
+    m.insert(0, 2) = 1;
+    m.insert(0, 3) = 0;
+    m.insert(0, 4) = 3;
+    m.insert(1, 0) = 3;
+    m.insert(1, 1) = 2;
+    m.insert(1, 2) = 0;
+    m.insert(1, 3) = 1;
+    m.insert(1, 4) = 0;
+    m.insert(2, 0) = 0;
+    m.insert(2, 1) = 1;
+    m.insert(2, 2) = 0;
+    m.insert(2, 3) = 0;
+    m.insert(2, 4) = 0;
+    /*
+        0, 0, 1, 0, 3,
+        3, 2, 0, 1, 0,
+        0, 1, 0, 0, 0;
+    */
     {
         Timer time;
-        Eigen::SparseMatrix<int> m(3, 5);
-        m.insert(0, 0) = 0;
-        m.insert(0, 1) = 0;
-        m.insert(0, 2) = 1;
-        m.insert(0, 3) = 0;
-        m.insert(0, 4) = 3;
-        m.insert(1, 0) = 3;
-        m.insert(1, 1) = 2;
-        m.insert(1, 2) = 0;
-        m.insert(1, 3) = 1;
-        m.insert(1, 4) = 0;
-        m.insert(2, 0) = 0;
-        m.insert(2, 1) = 1;
-        m.insert(2, 2) = 0;
-        m.insert(2, 3) = 0;
-        m.insert(2, 4) = 0;
         m.makeCompressed();
-        /*
-            0, 0, 1, 0, 3,
-            3, 2, 0, 1, 0,
-            0, 1, 0, 0, 0;
-        */
         Eigen::SparseMatrix<int> m_transposed = m.transpose();
-        columnSum = m_transposed.sum();
+        std::vector <double> colsums(m.cols());
+        for (size_t i = 0; i < mat.cols(); ++i) {
+            for (Eigen::SparseMatrix<double>::InnerIterator it(mat, i); it; ++it) {
+                colsums[i] += it.value();
+            }
+        }
     }
-    std::cout << columnSum << std::endl;
+    
+}
+
+std::vector<double> column_sums(Eigen::SparseMatrix<double>& mat){
+  std::vector<double> colsums(mat.cols());
+  for(size_t i = 0; i < mat.cols(); ++i){
+    for(Eigen::SparseMatrix<double>::InnerIterator it(mat, i); it; ++it){
+      colsums[i] += it.value();
+    }
+  }
+  return colsums;
 }
