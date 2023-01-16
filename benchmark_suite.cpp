@@ -58,7 +58,6 @@ int main()
     {
         {
             Timer time;
-            std::cout << "------------- " << a << " --------------" << std::endl;
             action();
             outfile << time.accessTime() << std::endl;
         }
