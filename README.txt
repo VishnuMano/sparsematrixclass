@@ -1,0 +1,10 @@
+ToDo:
+1. Familiarize Eigen -
+2. Build Column Sum Algorithm with Eigen -
+3. Build Benchmarking Tool
+    - Records Timer
+    - Runs Multiple Times
+4. Generate Random Sparse Matrices
+5. Figure Out Visualization with GG Plot and R
+6. Benchmark Eigen Column Sum Algorithm
+7. Benchmark DeBruine Code
