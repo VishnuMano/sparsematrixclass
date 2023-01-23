@@ -8,3 +8,11 @@ ToDo:
 5. Figure Out Visualization with GG Plot and R
 6. Benchmark Eigen Column Sum Algorithm
 7. Benchmark DeBruine Code
+
+
+Sizes:
+1000
+10000
+100000
+
+Column Sums
