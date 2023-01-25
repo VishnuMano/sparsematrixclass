@@ -1,0 +1,10 @@
+"0","library(Rcpp)"
+"0","library(RcppClock)"
+"0","library(RcppEigen)"
+"0","sourceCpp(""playground.cpp"")"
+"0","iteratorBenchmark(10000, 10000, 50.0)"
+"1","Testing Experimental Iterato"
+"1","r
+Testing Eigen
+Testing CSC Iterator
+"
