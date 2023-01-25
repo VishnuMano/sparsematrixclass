@@ -1,3 +1,0 @@
-1. Is it faster to write to a file or add to an array?
-2. Why is the first time smaller than the rest of them?
-3. What size matrices should I benchmark?
