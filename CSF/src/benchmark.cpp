@@ -46,9 +46,9 @@ class Timer
 
 int main() {
 
-    int numRows = 100;
-    int numCols = 10;
-    int sparsity = 20;
+    int numRows = 1000;
+    int numCols = 1000;
+    int sparsity = 1;
     uint64_t seed = 5645646546;
     generateMatrix<int>(numRows, numCols, sparsity, seed);
 
@@ -75,7 +75,7 @@ Eigen::SparseMatrix<T> generateMatrix(int numRows, int numCols, int sparsity, ui
     // colsum time calculator
     std::ofstream outfile ("times.txt");
     vector<int> colsums(myMatrix.cols());
-    for(int a = 0; a < 100; ++a)
+    for(int a = 0; a < 51; ++a)
     {
         Timer timer;
         for (size_t i = 0; i < myMatrix.cols(); i++)
@@ -89,13 +89,20 @@ Eigen::SparseMatrix<T> generateMatrix(int numRows, int numCols, int sparsity, ui
     }
     outfile.close();
 
-    // matrix size calculator
+    // matrix size/sparsity calculator
     std::ofstream s_file ("size.txt");
-    for (size_t i = 0; i < 100; i++)
+    for (size_t i = 0; i < 50; i++)
     {
         s_file << numRows * numCols << ", ";
     }
     s_file.close();
+
+    std::ofstream sp_file ("sparsity.txt");
+    for (size_t i = 0; i < 50; i++)
+    {
+        sp_file << "0.01" << ", ";
+    }
+    sp_file.close();
     // ------------------------ print results ----------------------------------------
     for (size_t i = 0; i < myMatrix.cols(); i++)
     {

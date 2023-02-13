@@ -67,7 +67,7 @@ void iteratorBenchmark(int numRows, int numCols, int sparsity, uint64_t seed) {
    
     //The next two blocks do essentially the same as the first but only go through the CSC matrix
 
-    cout << "Testing Eigen" << endl;
+    cout << "Testing Eigen" << endl; // 636F7574 203C3C20 22546573 74696E67 20456967 656E2220 3C3C2065 6E646C
     total = 0;
 
     //begin timing
